@@ -98,20 +98,22 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       status: "todo",
       taskId: Math.random(),
     };
+    /*
     Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`, task)
       .then(() => console.log("adding task"))
       .then(() => uppdateListOfTasks())
       .catch((err) => {
         console.error(err);
       });
+      */
   };
-  /*
-
+  
   const uppdateTask = (task: ITask) => {
     console.log("uppddating task:  " + task.taskId);
     console.log("current task status:  " + task.status);
     console.log("uppddating task:  " + task.title);
-
+    
+    /*
     let tempStatus = "";
     if (task.status === "todo") {
       tempStatus = "done";
@@ -127,9 +129,9 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       .catch((err) => {
         console.error(err);
       });
+      */
   };
 
-  */
   /*
   <div>
         <p className="red important">
