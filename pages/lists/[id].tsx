@@ -98,13 +98,13 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       status: "todo",
       taskId: Math.random(),
     };
-    /*
     Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`, task)
-      .then(() => console.log("adding task"))
+    .then(() => console.log("adding task"))
+    .catch((err) => {
+      console.error(err);
+    });
+    /*
       .then(() => uppdateListOfTasks())
-      .catch((err) => {
-        console.error(err);
-      });
       */
   };
   
