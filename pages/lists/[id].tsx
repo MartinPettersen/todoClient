@@ -46,8 +46,9 @@ export const getStaticProps = async (context: any) => {
   };
 };
 */
-
+/*
 export const getServerSideProps = async (context: any) => {
+  
   const id = context.params.id;
   console.log(context);
   const tempID = "e37c7c59-9c4e-4d1a-8458-f61cf94cafad";
@@ -60,12 +61,14 @@ export const getServerSideProps = async (context: any) => {
     
   };
 };
-
+*/
 type TodoListProp = {
   todoList: ITodoList;
 };
 
 const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
+  
+  /*
   const router = useRouter();
 
   const [taskTitle, setTaskTitle] = useState("");
@@ -121,6 +124,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     setListOfTasks([...tempList]);
     console.log("uppdating list of tasks");
   };
+  */
   /*
   <div>
         <p className="red important">
@@ -190,6 +194,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       </div>
       /*/
 
+  /*
   useEffect(() => {
     uppdateListOfTasks();
     console.log("First render");
@@ -197,6 +202,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   useEffect(() => {
     console.log("rerender");
   }, [setListOfTasks]);
+  */
   return (
     <div>
       <p>test</p>
