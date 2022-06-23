@@ -202,11 +202,11 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       /*/
 
   /*
+  */
   useEffect(() => {
     uppdateListOfTasks();
     console.log("First render");
   }, []);
-  */
   useEffect(() => {
     console.log("rerender");
   }, [setListOfTasks]);
