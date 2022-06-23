@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "heroku-postbuild": "npm run build",
-    "lint": "next lint",
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "12.1.6",
