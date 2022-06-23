@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import React, { useState, useEffect } from "react";
 import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 import Axios from "axios";
 import Task from "../../components/Task";
 import { useRouter } from "next/router";
@@ -74,6 +75,8 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [lisOfTasks, setListOfTasks] = useState<ITask[]>([]);
+  const url = v4();
+  
   /*
   const url = uuid();
   const getUppdatedList = async () => {
