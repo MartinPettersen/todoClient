@@ -91,7 +91,6 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     console.log("uppdating list of tasks");
   };
   
-/*
   const createTask = () => {
     const task = {
       title: taskTitle,
@@ -99,14 +98,15 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       status: "todo",
       taskId: uuid(),
     };
+    /*
     Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`, task)
       .then(() => console.log("adding task"))
       .then(() => uppdateListOfTasks())
       .catch((err) => {
         console.error(err);
       });
+      */
   };
-  */
   /*
 
   const uppdateTask = (task: ITask) => {
