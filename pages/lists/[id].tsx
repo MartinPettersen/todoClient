@@ -68,14 +68,14 @@ type TodoListProp = {
 
 const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   
-  /*
+
   const router = useRouter();
 
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [lisOfTasks, setListOfTasks] = useState<ITask[]>([]);
   const url = uuid();
-
+  /*
   const getUppdatedList = async () => {
     const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/${todoList.url}`);
     const data = await res.json();
