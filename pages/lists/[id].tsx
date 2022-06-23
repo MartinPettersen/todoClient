@@ -19,7 +19,7 @@ interface ITodoList {
   url: string;
   tasks: Array<ITask>;
 }
-
+/*
 export const getStaticPaths = async (context: string) => {
   console.log("the context " + context);
   console.log(context);
@@ -46,9 +46,10 @@ export const getStaticProps = async (context: any) => {
     props: { todoList: data[0] },
   };
 };
+*/
 
 
-/*
+
 export const getServerSideProps = async (context: any) => {
   
   const id = context.params.id;
@@ -63,7 +64,6 @@ export const getServerSideProps = async (context: any) => {
     
   };
 };
-*/
 
 type TodoListProp = {
   todoList: ITodoList;
