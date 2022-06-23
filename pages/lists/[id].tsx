@@ -121,17 +121,8 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     setListOfTasks([...tempList]);
     console.log("uppdating list of tasks");
   };
-
-  useEffect(() => {
-    uppdateListOfTasks();
-    console.log("First render");
-  }, []);
-  useEffect(() => {
-    console.log("rerender");
-  }, [setListOfTasks]);
-  return (
-    <div>
-      <div>
+  /*
+  <div>
         <p className="red important">
           Keep this url to access this todoList. You can send it to others if
           you want share your todolist
@@ -197,6 +188,18 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
           </div>
         </div>
       </div>
+      /*/
+
+  useEffect(() => {
+    uppdateListOfTasks();
+    console.log("First render");
+  }, []);
+  useEffect(() => {
+    console.log("rerender");
+  }, [setListOfTasks]);
+  return (
+    <div>
+      <p>test</p>
     </div>
   );
 };
