@@ -113,9 +113,9 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
         cache: 'default'
       })
       .then(() => console.log("adding task"))
+      .then(() => uppdateListOfTasks())
       /*
     Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`, task)
-    .then(() => uppdateListOfTasks())
     .catch((err) => {
       console.error(err);
     });
