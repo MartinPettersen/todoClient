@@ -18,6 +18,7 @@ interface ITodoList {
   url: string;
   tasks: Array<ITask>;
 }
+/*
 export const getStaticPaths = async (context: string) => {
   console.log("the context " + context);
   console.log(context);
@@ -34,8 +35,8 @@ export const getStaticPaths = async (context: string) => {
     paths,
     fallback: false,
   };
-};
-
+};*/
+/*
 export const getStaticProps = async (context: any) => {
   const id = context.params.id;
   const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/${id}`);
@@ -44,9 +45,21 @@ export const getStaticProps = async (context: any) => {
     props: { todoList: data[0] },
   };
 };
+*/
 
-
-
+export const getServerSideProps = async (context: any) => {
+  const id = context.params.id;
+  console.log(context);
+  const tempID = "e37c7c59-9c4e-4d1a-8458-f61cf94cafad";
+  const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/${id}`);
+  const data = await res.json();
+  
+  return {
+    
+      props: { todoList: data[0] },
+    
+  };
+};
 
 type TodoListProp = {
   todoList: ITodoList;

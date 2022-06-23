@@ -28,7 +28,7 @@ const ListPage: NextPage = () => {
         console.error(err);
       });
       setTimeout(() => {
-        router.push(`/lists/${url}`)
+        router.push(`/lists/${list.url}`)
       }, 3000)
   };
 
