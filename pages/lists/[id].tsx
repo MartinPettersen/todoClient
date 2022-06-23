@@ -133,6 +133,20 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     } else {
       tempStatus = "todo";
     }
+    fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application.json',
+        'Content-Type': 'application/json'
+      },
+        body: JSON.stringify({
+          status: tempStatus,
+          taskId: task.taskId,
+        }),
+        cache: 'default'
+      })
+      .then(() => console.log("uppdating task status"))
+      .then(() => uppdateListOfTasks())
     /*
     Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/uppdate/${todoList.url}`, {
       status: tempStatus,
