@@ -46,7 +46,7 @@ export const getStaticProps = async (context: any) => {
   };
 };
 */
-/*
+
 export const getServerSideProps = async (context: any) => {
   
   const id = context.params.id;
@@ -61,7 +61,7 @@ export const getServerSideProps = async (context: any) => {
     
   };
 };
-*/
+
 type TodoListProp = {
   todoList: ITodoList;
 };
