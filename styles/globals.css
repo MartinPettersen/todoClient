@@ -1,0 +1,123 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #4e4d4f;
+  color: white;
+}
+nav {
+  padding: 1rem, 0;
+  margin: 0rem auto 0rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border-bottom: 1px solid #FF7800;
+  background-color:  	#272729;
+}
+
+nav a{
+  color: #FF7800;
+  padding-right: 1rem;
+  padding-bottom: 0.1rem;
+}
+
+nav .logo {
+  margin-right: auto;
+  color: #FF7800;
+  padding-left: 1.2rem;
+}
+
+.content {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
+.inputContainer{
+  display: flex;
+  justify-content: left;
+
+}
+.text {
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+}
+
+.orange{
+  color: #FF7800;
+}
+
+.blue {
+  color: #1C71D8;
+}
+
+.red {
+  color: #E01B24;
+}
+
+.important {
+  font-size: 30px;
+}
+
+.taskContainer {
+  background-color: white;
+  width: 40%;
+}
+.finishedContainer {
+  border: solid 1px #E01B24;
+}
+.todoContainer {
+  border: solid 1px #1C71D8;
+}
+
+.black {
+  color: black;
+}
+
+.colonHeader {
+  width: 40%;
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 30px;
+}
+
+.blue-background{
+  background-color: #1C71D8;
+  color: white;
+  margin-bottom: 0rem;
+}
+.red-background{
+  background-color: #E01B24;
+  color: white;
+  margin-bottom: 0rem;
+}
+
+.orange-border {
+  border: solid 1px #FF7800;
+}
+
+.todo-background{
+  background-color: #1C71D8;
+  color: white;
+  margin-bottom: 0rem;
+  margin: 1rem;
+}
+.done-background{
+  background-color: #E01B24;
+  color: white;
+  margin-bottom: 0rem;
+  margin: 1rem;
+}
+.taskText {
+  padding: 1rem;
+}
