@@ -113,13 +113,13 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     console.log("current task status:  " + task.status);
     console.log("uppddating task:  " + task.title);
     
-    /*
     let tempStatus = "";
     if (task.status === "todo") {
       tempStatus = "done";
     } else {
       tempStatus = "todo";
     }
+    /*
     Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/uppdate/${todoList.url}`, {
       status: tempStatus,
       taskId: task.taskId,
