@@ -227,6 +227,72 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   return (
     <div>
       <p>test</p>
+      <div>
+        <p className="red important">
+          Keep this url to access this todoList. You can send it to others if
+          you want share your todolist
+        </p>
+      </div>
+      <p className="blue important">URL: /lists/{todoList.url}</p>
+      <h1>Todo List: </h1>
+      <h2>Title: {todoList.title}</h2>
+      <h3>Desc: {todoList.description}</h3>
+      <div>
+        <h3>Create a new Task:</h3>
+        <div className="inputContainer">
+          <div className="wrapper">
+            <p className="text orange">Title:</p>
+            <input
+              className="taskTitle"
+              value={taskTitle}
+              onChange={(e) => setTaskTitle(e.target.value)}
+            />
+          </div>
+          <div className="wrapper">
+            <p className="text orange">Description:</p>
+            <input
+              className="taskDescription"
+              value={taskDescription}
+              onChange={(e) => setTaskDescription(e.target.value)}
+            />
+          </div>
+          <p onClick={() => createTask()} className="orange-border">
+            Create Task
+          </p>
+        </div>
+      </div>
+      <div>
+        <div className="wrapper">
+          <h3 className="colonHeader blue-background todoContainer">Todo</h3>
+          <h3 className="colonHeader red-background finishedContainer">Done</h3>
+        </div>
+        <div className="wrapper">
+          <div className="todoContainer taskContainer">
+            <div>
+              {lisOfTasks
+                .filter((task) => task.status === "todo")
+                .map((task) => (
+                  <Task
+                    key={task.taskId}
+                    uppdateTask={uppdateTask}
+                    todoTask={task}
+                  />
+                ))}
+            </div>
+          </div>
+          <div className="finishedContainer taskContainer">
+            {lisOfTasks
+              .filter((task) => task.status === "done")
+              .map((task) => (
+                <Task
+                  key={task.taskId}
+                  uppdateTask={uppdateTask}
+                  todoTask={task}
+                />
+              ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
