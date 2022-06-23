@@ -5,10 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "heroku-postbuild": "npm run build",
     "lint": "next lint",
-    "postinstall": "tsc"
   },
   "dependencies": {
     "next": "12.1.6",
