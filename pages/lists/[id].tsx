@@ -84,6 +84,14 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     return data[0].tasks
   }  
 
+  const uppdateListOfTasks = async () => {
+    const tempList = await getUppdatedList();
+    console.log(tempList);
+    setListOfTasks([...tempList]);
+    console.log("uppdating list of tasks");
+  };
+  
+/*
   const createTask = () => {
     const task = {
       title: taskTitle,
@@ -98,6 +106,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
         console.error(err);
       });
   };
+  */
   /*
 
   const uppdateTask = (task: ITask) => {
@@ -123,12 +132,6 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   };
 
   */
-  const uppdateListOfTasks = async () => {
-    const tempList = await getUppdatedList();
-    console.log(tempList);
-    setListOfTasks([...tempList]);
-    console.log("uppdating list of tasks");
-  };
   /*
   <div>
         <p className="red important">
