@@ -96,7 +96,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       title: taskTitle,
       description: taskDescription,
       status: "todo",
-      taskId: uuid(),
+      taskId: Math.random(),
     };
     /*
     Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`, task)
