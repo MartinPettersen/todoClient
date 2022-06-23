@@ -75,7 +75,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [lisOfTasks, setListOfTasks] = useState<ITask[]>([]);
-  const url = v4();
+  const url = Math.random();
   
   /*
   const url = uuid();
