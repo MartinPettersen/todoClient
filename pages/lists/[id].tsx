@@ -23,49 +23,17 @@ interface ITodoList {
   sharedUrl: string;
   readOnly: boolean;
 }
-/*
-export const getStaticPaths = async (context: string) => {
-  console.log("the context " + context);
-  console.log(context);
-  const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/`);
-  const data = await res.json();
-
-  const paths = data.map((list: ITodoList) => {
-    return {
-      params: { id: list.url },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps = async (context: any) => {
-  const id = context.params.id;
-  const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/${id}`);
-  const data = await res.json();
-  return {
-    props: { todoList: data[0] },
-  };
-};
-*/
-
-
 
 export const getServerSideProps = async (context: any) => {
-  
   const id = context.params.id;
-  console.log(context);
   const tempID = "e37c7c59-9c4e-4d1a-8458-f61cf94cafad";
-  const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/${id}`);
+  const res = await fetch(
+    `https://sheltered-inlet-32387.herokuapp.com/api/list/${id}`
+  );
   const data = await res.json();
-  
+
   return {
-    
-      props: { todoList: data[0] },
-    
+    props: { todoList: data[0] },
   };
 };
 
@@ -74,8 +42,6 @@ type TodoListProp = {
 };
 
 const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
-  
-
   const router = useRouter();
 
   const [taskTitle, setTaskTitle] = useState("");
@@ -84,33 +50,30 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [isFrozen, setIsFrozen] = useState(todoList.readOnly);
 
-
   const [lisOfTasks, setListOfTasks] = useState<ITask[]>([]);
   const url = Math.random();
-  
-  //const url = uuid();
+
   const getUppdatedList = async () => {
-    const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/${todoList.url}`);
+    const res = await fetch(
+      `https://sheltered-inlet-32387.herokuapp.com/api/list/${todoList.url}`
+    );
     const data = await res.json();
-    setTotalCost(data[0].totalCost)
-    console.log('actual total cost ' + data[0].totalCost)
-    return data[0].tasks
-  }  
+    setTotalCost(data[0].totalCost);
+    return data[0].tasks;
+  };
 
   const uppdateListOfTasks = async () => {
     const tempList = await getUppdatedList();
-    console.log(tempList);
     setListOfTasks(tempList);
-    //setListOfTasks([...tempList]);
-    
+
     console.log("uppdating list of tasks");
   };
   const freezeList = async () => {
-    const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/freeze/${todoList.url}`);
+    const res = await fetch(
+      `https://sheltered-inlet-32387.herokuapp.com/api/list/freeze/${todoList.url}`
+    );
     setIsFrozen(!isFrozen);
-
-
-  }
+  };
   const createTask = () => {
     const task = {
       title: taskTitle,
@@ -118,68 +81,61 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       status: "todo",
       taskId: Math.random(),
     };
- 
-    fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application.json',
-        'Content-Type': 'application/json'
-      },
+
+    fetch(
+      `https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application.json",
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           title: taskTitle,
           description: taskDescription,
           status: "todo",
           taskId: Math.random(),
-          cost: taskCost
+          cost: taskCost,
         }),
-        cache: 'default'
-      })
+        cache: "default",
+      }
+    )
       .then(() => console.log("adding task"))
-      .then(() => uppdateListOfTasks())
-      /*
-    Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`, task)
-    .catch((err) => {
-      console.error(err);
-    });
-      */
+      .then(() => uppdateListOfTasks());
   };
-  
+
   const uppdateTask = async (task: ITask) => {
-    console.log("uppddating task:  " + task.taskId);
-    console.log("current task status:  " + task.status);
-    console.log("uppddating task:  " + task.title);
-    
     let tempStatus = "";
     if (task.status === "todo") {
       tempStatus = "done";
     } else {
       tempStatus = "todo";
     }
-    
-    await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/uppdate/${todoList.url}`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application.json',
-        'Content-Type': 'application/json'
-      },
+
+    await fetch(
+      `https://sheltered-inlet-32387.herokuapp.com/api/list/uppdate/${todoList.url}`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application.json",
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           status: tempStatus,
           taskId: task.taskId,
         }),
-        cache: 'default'
-      })
+        cache: "default",
+      }
+    )
       .then(() => console.log("uppdating task status"))
       .then(() => uppdateListOfTasks())
       .catch((err) => {
         console.error(err);
       });
-
   };
-
 
   useEffect(() => {
     uppdateListOfTasks();
-    console.log("First render");
   }, []);
 
   useEffect(() => {
@@ -202,15 +158,22 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
           you want share your todolist
         </p>
       </div>
-      <p className="orange important">Admin URL: https://todoclient-mountain-spring.herokuapp.com/lists/{todoList.url}</p>
-      <p className="orange important">URL to share with others: https://todoclient-mountain-spring.herokuapp.com/shared/{todoList.sharedUrl}</p>
+      <p className="orange important">
+        Admin URL: https://todoclient-mountain-spring.herokuapp.com/lists/
+        {todoList.url}
+      </p>
+      <p className="orange important">
+        URL to share with others:
+        https://todoclient-mountain-spring.herokuapp.com/shared/
+        {todoList.sharedUrl}
+      </p>
 
       <h1 className="orange">Title: {todoList.title}</h1>
       <h3 className="orange">Desc: {todoList.description}</h3>
       <h3 className="orange">Current Total Cost: {totalCost}</h3>
       <h3 className="orange">Frozen: {isFrozen ? "True" : "False"}</h3>
       <div className="frozen-button">
-      <h2 onClick={() => freezeList()} >Freeze for guests</h2>
+        <h2 onClick={() => freezeList()}>Freeze for guests</h2>
       </div>
       <div>
         <h1>Create a new Task:</h1>
@@ -238,7 +201,6 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
               value={taskCost}
               onChange={(e) => setTaskCost(Number(e.target.value))}
             />
-
           </div>
         </div>
         <div className="orange-create-task">
@@ -250,7 +212,9 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       <div>
         <div className="wrapper">
           <h3 className="colonHeader red-background todoContainer">Todo</h3>
-          <h3 className="colonHeader blue-background finishedContainer">Done</h3>
+          <h3 className="colonHeader blue-background finishedContainer">
+            Done
+          </h3>
         </div>
         <div className="wrapper">
           <div className="todoContainer taskContainer">
@@ -263,7 +227,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
                     uppdateTask={uppdateTask}
                     todoTask={task}
                   />
-            ))}
+                ))}
             </div>
           </div>
           <div className="finishedContainer taskContainer">

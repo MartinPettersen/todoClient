@@ -23,16 +23,14 @@ const ListPage: NextPage = () => {
 
   const createList = () => {
     const listUrl = process.env.URL;
-    console.log('new url:');
-    console.log(listUrl);
     Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list`, list)
       .then(() => console.log("creating list with url: " + list.url))
       .catch((err) => {
         console.error(err);
       });
-      setTimeout(() => {
-        router.push(`/lists/${list.url}`)
-      }, 3000)
+    setTimeout(() => {
+      router.push(`/lists/${list.url}`);
+    }, 3000);
   };
 
   return (

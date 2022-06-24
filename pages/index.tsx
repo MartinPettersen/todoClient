@@ -6,7 +6,6 @@ import Axios from "axios";
 import Link from "next/link";
 
 const Home: NextPage = () => {
-
   return (
     <div className={styles.container}>
       <Head>
@@ -22,8 +21,11 @@ const Home: NextPage = () => {
         <h2>Just create your Todo List and share the URL</h2>
 
         <div className="orange-background">
-
-        <Link  href="Listpage"><a className="white"><h2>Create a New List</h2></a></Link>
+          <Link href="Listpage">
+            <a className="white">
+              <h2>Create a New List</h2>
+            </a>
+          </Link>
         </div>
       </main>
     </div>
