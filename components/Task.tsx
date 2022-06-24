@@ -6,6 +6,7 @@ interface ITask {
   description: string;
   status: string;
   taskId: string;
+  cost?: number;
 }
 
 type TaskProp = {
@@ -19,6 +20,7 @@ const Task: React.FunctionComponent<TaskProp> = ({ todoTask, uppdateTask }) => {
 
     <h3>{todoTask.title}</h3>
     <p >{todoTask.description}</p>
+    <p >{todoTask.cost}</p>
     </div>
   </div>
   );

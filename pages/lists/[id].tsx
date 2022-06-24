@@ -76,6 +76,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
 
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+  const [taskCost, setTaskCost] = useState(0);
   const [lisOfTasks, setListOfTasks] = useState<ITask[]>([]);
   const url = Math.random();
   
@@ -113,6 +114,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
           description: taskDescription,
           status: "todo",
           taskId: Math.random(),
+          cost: taskCost
         }),
         cache: 'default'
       })
@@ -215,6 +217,14 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
               className="taskDescription"
               value={taskDescription}
               onChange={(e) => setTaskDescription(e.target.value)}
+            />
+          </div>
+          <div className="wrapper">
+            <p className="text orange">Cost:</p>
+            <input
+              className="taskCost"
+              value={taskCost}
+              onChange={(e) => setTaskCost(Number(e.target.value))}
             />
           </div>
           <p onClick={() => createTask()} className="orange-border">
