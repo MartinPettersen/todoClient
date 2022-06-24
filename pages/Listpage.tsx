@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 
 const ListPage: NextPage = () => {
   const url = uuid();
+  const sharedUrl = uuid();
+
   const [listTitle, setListTitle] = useState("");
   const [listDescription, setListDescription] = useState("");
   const router = useRouter();
@@ -16,6 +18,7 @@ const ListPage: NextPage = () => {
     url,
     title: listTitle,
     description: listDescription,
+    sharedUrl: sharedUrl,
   };
 
   const createList = () => {

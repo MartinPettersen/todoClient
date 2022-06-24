@@ -9,9 +9,6 @@ const Navbar = () => {
       <Link href="/">
         <a>Home</a>
       </Link>
-      <Link href="/share">
-        <a>Share List</a>
-      </Link>
       <Link href="/Listpage">
         <a>Create a new list</a>
       </Link>

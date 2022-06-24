@@ -5,6 +5,7 @@ import { v4 } from "uuid";
 import Axios from "axios";
 import Task from "../../components/Task";
 import { useRouter } from "next/router";
+import FrozenTask from "../../components/FrozenTask";
 
 interface ITask {
   title: string;
@@ -23,35 +24,6 @@ interface ITodoList {
   sharedUrl: string;
   readOnly: boolean;
 }
-/*
-export const getStaticPaths = async (context: string) => {
-  console.log("the context " + context);
-  console.log(context);
-  const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/`);
-  const data = await res.json();
-
-  const paths = data.map((list: ITodoList) => {
-    return {
-      params: { id: list.url },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps = async (context: any) => {
-  const id = context.params.id;
-  const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/${id}`);
-  const data = await res.json();
-  return {
-    props: { todoList: data[0] },
-  };
-};
-*/
-
 
 
 export const getServerSideProps = async (context: any) => {
@@ -59,7 +31,7 @@ export const getServerSideProps = async (context: any) => {
   const id = context.params.id;
   console.log(context);
   const tempID = "e37c7c59-9c4e-4d1a-8458-f61cf94cafad";
-  const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/${id}`);
+  const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/shared/${id}`);
   const data = await res.json();
   
   return {
@@ -84,7 +56,6 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [isFrozen, setIsFrozen] = useState(todoList.readOnly);
 
-
   const [lisOfTasks, setListOfTasks] = useState<ITask[]>([]);
   const url = Math.random();
   
@@ -97,20 +68,23 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     return data[0].tasks
   }  
 
+  const checkForFrozen = async () => {
+    const tempList = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/shared/${todoList.url}`);
+    const tempData = await tempList.json();
+    //setIsFrozen(tempList[0].readOnly);
+    console.log("tempData: ")
+    console.log(tempData);
+    return isFrozen;
+  }
+
   const uppdateListOfTasks = async () => {
     const tempList = await getUppdatedList();
     console.log(tempList);
     setListOfTasks(tempList);
     //setListOfTasks([...tempList]);
-    
     console.log("uppdating list of tasks");
   };
-  const freezeList = async () => {
-    const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/freeze/${todoList.url}`);
-    setIsFrozen(!isFrozen);
-
-
-  }
+  
   const createTask = () => {
     const task = {
       title: taskTitle,
@@ -118,7 +92,6 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       status: "todo",
       taskId: Math.random(),
     };
- 
     fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`, {
       method: 'POST',
       headers: {
@@ -173,17 +146,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       .catch((err) => {
         console.error(err);
       });
-    /*
-    Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/uppdate/${todoList.url}`, {
-      status: tempStatus,
-      taskId: task.taskId,
-    })
-      .then(() => console.log("uppdating task status"))
-      .then(() => uppdateListOfTasks())
-      .catch((err) => {
-        console.error(err);
-      });
-      */
+
   };
 
 
@@ -194,36 +157,36 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
 
   useEffect(() => {
     const refreshInterval = setInterval(() => {
+      setIsFrozen(todoList.readOnly);
+      checkForFrozen();
       uppdateListOfTasks();
+
     }, 3000);
 
     return () => clearInterval(refreshInterval);
   }, []);
 
   useEffect(() => {
+    checkForFrozen();
+    setIsFrozen(todoList.readOnly);
+
     console.log("rerender");
   }, [setListOfTasks]);
 
   return (
     <div>
       <div>
-        <p className="red important">
-          Keep this url to access this todoList. You can send it to others if
-          you want share your todolist
-        </p>
       </div>
-      <p className="blue important">Admin URL: /lists/{todoList.url}</p>
       <p className="blue important">Url to share with others: /shared/{todoList.sharedUrl}</p>
 
       <h1>Todo List: </h1>
       <h2>Title: {todoList.title}</h2>
       <h3>Desc: {todoList.description}</h3>
       <h3>Current Total Cost: {totalCost}</h3>
-      <h3>Frozen: {isFrozen ? "True" : "False"}</h3>
-      <p onClick={() => freezeList()} className="orange-border">
-            Freeze for guests
-          </p>
-      <div>
+
+      {isFrozen ? <div>
+        <p>You dont have permission</p>  
+      </div> : <div>
         <h3>Create a new Task:</h3>
         <div className="inputContainer">
           <div className="wrapper">
@@ -255,12 +218,39 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
             Create Task
           </p>
         </div>
-      </div>
+        </div>
+        }
       <div>
         <div className="wrapper">
           <h3 className="colonHeader blue-background todoContainer">Todo</h3>
           <h3 className="colonHeader red-background finishedContainer">Done</h3>
         </div>
+        {isFrozen ? <div>
+          <div className="wrapper">
+          <div className="todoContainer taskContainer">
+            <div>
+              {lisOfTasks
+                .filter((task) => task.status === "todo")
+                .map((task) => (
+                  <FrozenTask
+                    key={task.taskId}
+                    todoTask={task}
+                  />
+            ))}
+            </div>
+          </div>
+          <div className="finishedContainer taskContainer">
+            {lisOfTasks
+              .filter((task) => task.status === "done")
+              .map((task) => (
+                <FrozenTask
+                  key={task.taskId}
+                  todoTask={task}
+                />
+              ))}
+          </div>
+        </div>
+      </div> :
         <div className="wrapper">
           <div className="todoContainer taskContainer">
             <div>
@@ -287,6 +277,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
               ))}
           </div>
         </div>
+      }
       </div>
     </div>
   );
