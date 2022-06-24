@@ -167,9 +167,6 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   }, []);
 
   useEffect(() => {
-    checkForFrozen();
-    setIsFrozen(todoList.readOnly);
-
     console.log("rerender");
   }, [setListOfTasks]);
 
