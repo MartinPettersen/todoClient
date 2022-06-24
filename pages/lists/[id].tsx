@@ -11,6 +11,7 @@ interface ITask {
   description: string;
   status: string;
   taskId: string;
+  cost: number;
 }
 
 interface ITodoList {
@@ -18,6 +19,7 @@ interface ITodoList {
   description: string;
   url: string;
   tasks: Array<ITask>;
+  totalCost: number;
 }
 /*
 export const getStaticPaths = async (context: string) => {
@@ -77,6 +79,9 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskCost, setTaskCost] = useState(0);
+  const [totalCost, setTotalCost] = useState(0);
+  const [remainingCost, setRemainingCost] = useState(0);
+
   const [lisOfTasks, setListOfTasks] = useState<ITask[]>([]);
   const url = Math.random();
   
@@ -84,6 +89,8 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   const getUppdatedList = async () => {
     const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/${todoList.url}`);
     const data = await res.json();
+    setTotalCost(data[0].totalCost)
+    console.log('actual total cost ' + data[0].totalCost)
     return data[0].tasks
   }  
 
@@ -92,7 +99,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     console.log(tempList);
     setListOfTasks(tempList);
     //setListOfTasks([...tempList]);
-
+    
     console.log("uppdating list of tasks");
   };
   
@@ -200,6 +207,8 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       <h1>Todo List: </h1>
       <h2>Title: {todoList.title}</h2>
       <h3>Desc: {todoList.description}</h3>
+      <h3>Current Total Cost: {totalCost}</h3>
+
       <div>
         <h3>Create a new Task:</h3>
         <div className="inputContainer">
@@ -226,6 +235,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
               value={taskCost}
               onChange={(e) => setTaskCost(Number(e.target.value))}
             />
+
           </div>
           <p onClick={() => createTask()} className="orange-border">
             Create Task
@@ -248,7 +258,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
                     uppdateTask={uppdateTask}
                     todoTask={task}
                   />
-                ))}
+            ))}
             </div>
           </div>
           <div className="finishedContainer taskContainer">
