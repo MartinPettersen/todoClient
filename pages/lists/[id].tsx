@@ -175,6 +175,14 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   }, []);
 
   useEffect(() => {
+    const refreshInterval = setInterval(() => {
+      uppdateListOfTasks();
+    }, 3000);
+
+    return () => clearInterval(refreshInterval);
+  }, []);
+
+  useEffect(() => {
     console.log("rerender");
   }, [setListOfTasks]);
 
