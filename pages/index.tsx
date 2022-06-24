@@ -21,7 +21,10 @@ const Home: NextPage = () => {
         <h2>No login or signup needed!</h2>
         <h2>Just create your Todo List and share the URL</h2>
 
-        <Link href="Listpage"><a>Create a New List</a></Link>
+        <div className="orange-background">
+
+        <Link  href="Listpage"><a className="white"><h2>Create a New List</h2></a></Link>
+        </div>
       </main>
     </div>
   );

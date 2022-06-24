@@ -46,7 +46,7 @@ const ListPage: NextPage = () => {
         <h1 className="orange">Creating a New List</h1>
         <div className="inputContainer">
           <div className="wrapper">
-            <p className="text orange">Title:</p>
+            <h2 className="text orange">Title:</h2>
             <input
               className="listTitle"
               value={listTitle}
@@ -54,7 +54,7 @@ const ListPage: NextPage = () => {
             />
           </div>
           <div className="wrapper">
-            <p className="text orange">Description:</p>
+            <h2 className="text orange">Description:</h2>
             <input
               className="listDescription"
               value={listDescription}
@@ -63,7 +63,9 @@ const ListPage: NextPage = () => {
           </div>
         </div>
 
-        <button onClick={createList}>Create List</button>
+        <div className="orange-background">
+          <h2 onClick={createList}>Create List</h2>
+        </div>
       </main>
     </div>
   );

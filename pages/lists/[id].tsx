@@ -173,17 +173,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       .catch((err) => {
         console.error(err);
       });
-    /*
-    Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/uppdate/${todoList.url}`, {
-      status: tempStatus,
-      taskId: task.taskId,
-    })
-      .then(() => console.log("uppdating task status"))
-      .then(() => uppdateListOfTasks())
-      .catch((err) => {
-        console.error(err);
-      });
-      */
+
   };
 
 
@@ -207,24 +197,23 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   return (
     <div>
       <div>
-        <p className="red important">
+        <p className="orange important">
           Keep this url to access this todoList. You can send it to others if
           you want share your todolist
         </p>
       </div>
-      <p className="blue important">Admin URL: /lists/{todoList.url}</p>
-      <p className="blue important">Url to share with others: /shared/{todoList.sharedUrl}</p>
+      <p className="orange important">Admin URL: https://todoclient-mountain-spring.herokuapp.com/lists/{todoList.url}</p>
+      <p className="orange important">URL to share with others: https://todoclient-mountain-spring.herokuapp.com/shared/{todoList.sharedUrl}</p>
 
-      <h1>Todo List: </h1>
-      <h2>Title: {todoList.title}</h2>
-      <h3>Desc: {todoList.description}</h3>
-      <h3>Current Total Cost: {totalCost}</h3>
-      <h3>Frozen: {isFrozen ? "True" : "False"}</h3>
-      <p onClick={() => freezeList()} className="orange-border">
-            Freeze for guests
-          </p>
+      <h1 className="orange">Title: {todoList.title}</h1>
+      <h3 className="orange">Desc: {todoList.description}</h3>
+      <h3 className="orange">Current Total Cost: {totalCost}</h3>
+      <h3 className="orange">Frozen: {isFrozen ? "True" : "False"}</h3>
+      <div className="frozen-button">
+      <h2 onClick={() => freezeList()} >Freeze for guests</h2>
+      </div>
       <div>
-        <h3>Create a new Task:</h3>
+        <h1>Create a new Task:</h1>
         <div className="inputContainer">
           <div className="wrapper">
             <p className="text orange">Title:</p>
@@ -251,15 +240,17 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
             />
 
           </div>
-          <p onClick={() => createTask()} className="orange-border">
+        </div>
+        <div className="orange-create-task">
+          <h2 onClick={() => createTask()} className="orange-border">
             Create Task
-          </p>
+          </h2>
         </div>
       </div>
       <div>
         <div className="wrapper">
-          <h3 className="colonHeader blue-background todoContainer">Todo</h3>
-          <h3 className="colonHeader red-background finishedContainer">Done</h3>
+          <h3 className="colonHeader red-background todoContainer">Todo</h3>
+          <h3 className="colonHeader blue-background finishedContainer">Done</h3>
         </div>
         <div className="wrapper">
           <div className="todoContainer taskContainer">

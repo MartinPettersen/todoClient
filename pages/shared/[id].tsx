@@ -59,7 +59,6 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   const [lisOfTasks, setListOfTasks] = useState<ITask[]>([]);
   const url = Math.random();
   
-  //const url = uuid();
   const getUppdatedList = async () => {
     const res = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/${todoList.url}`);
     const data = await res.json();
@@ -71,7 +70,6 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
   const checkForFrozen = async () => {
     const tempList = await fetch(`https://sheltered-inlet-32387.herokuapp.com/api/list/shared/${todoList.url}`);
     const tempData = await tempList.json();
-    //setIsFrozen(tempList[0].readOnly);
     console.log("tempData: ")
     console.log(tempData);
     return isFrozen;
@@ -81,7 +79,6 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     const tempList = await getUppdatedList();
     console.log(tempList);
     setListOfTasks(tempList);
-    //setListOfTasks([...tempList]);
     console.log("uppdating list of tasks");
   };
   
@@ -109,12 +106,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
       })
       .then(() => console.log("adding task"))
       .then(() => uppdateListOfTasks())
-      /*
-    Axios.post(`https://sheltered-inlet-32387.herokuapp.com/api/list/add/${todoList.url}`, task)
-    .catch((err) => {
-      console.error(err);
-    });
-      */
+
   };
   
   const uppdateTask = async (task: ITask) => {
@@ -174,53 +166,55 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     <div>
       <div>
       </div>
-      <p className="blue important">Url to share with others: /shared/{todoList.sharedUrl}</p>
+      <p className="orange important">URL to share with others: /shared/{todoList.sharedUrl}</p>
 
-      <h1>Todo List: </h1>
-      <h2>Title: {todoList.title}</h2>
-      <h3>Desc: {todoList.description}</h3>
-      <h3>Current Total Cost: {totalCost}</h3>
+      <h2 className="orange">Title: {todoList.title}</h2>
+      <h3 className="orange">Desc: {todoList.description}</h3>
+      <h3 className="orange">Current Total Cost: {totalCost}</h3>
 
       {isFrozen ? <div>
-        <p>You dont have permission</p>  
-      </div> : <div>
-        <h3>Create a new Task:</h3>
-        <div className="inputContainer">
-          <div className="wrapper">
-            <p className="text orange">Title:</p>
-            <input
-              className="taskTitle"
-              value={taskTitle}
-              onChange={(e) => setTaskTitle(e.target.value)}
-            />
-          </div>
-          <div className="wrapper">
-            <p className="text orange">Description:</p>
-            <input
-              className="taskDescription"
-              value={taskDescription}
-              onChange={(e) => setTaskDescription(e.target.value)}
-            />
-          </div>
-          <div className="wrapper">
-            <p className="text orange">Cost:</p>
-            <input
-              className="taskCost"
-              value={taskCost}
-              onChange={(e) => setTaskCost(Number(e.target.value))}
-            />
+        <p className="red">You dont have permission</p>  
+      </div> : 
+      <div>
+      <h1>Create a new Task:</h1>
+      <div className="inputContainer">
+        <div className="wrapper">
+          <p className="text orange">Title:</p>
+          <input
+            className="taskTitle"
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
+          />
+        </div>
+        <div className="wrapper">
+          <p className="text orange">Description:</p>
+          <input
+            className="taskDescription"
+            value={taskDescription}
+            onChange={(e) => setTaskDescription(e.target.value)}
+          />
+        </div>
+        <div className="wrapper">
+          <p className="text orange">Cost:</p>
+          <input
+            className="taskCost"
+            value={taskCost}
+            onChange={(e) => setTaskCost(Number(e.target.value))}
+          />
 
-          </div>
-          <p onClick={() => createTask()} className="orange-border">
-            Create Task
-          </p>
         </div>
-        </div>
+      </div>
+      <div className="orange-create-task">
+        <h2 onClick={() => createTask()} className="orange-border">
+          Create Task
+        </h2>
+      </div>
+    </div>
         }
       <div>
         <div className="wrapper">
-          <h3 className="colonHeader blue-background todoContainer">Todo</h3>
-          <h3 className="colonHeader red-background finishedContainer">Done</h3>
+          <h3 className="colonHeader  red-background todoContainer">Todo</h3>
+          <h3 className="colonHeader blue-background finishedContainer">Done</h3>
         </div>
         {isFrozen ? <div>
           <div className="wrapper">

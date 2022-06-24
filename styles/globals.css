@@ -73,14 +73,18 @@ nav .logo {
   width: 40%;
 }
 .finishedContainer {
-  border: solid 1px #E01B24;
+  border: solid 1px #1C71D8;
 }
 .todoContainer {
-  border: solid 1px #1C71D8;
+  border: solid 1px #E01B24;
 }
 
 .black {
   color: black;
+}
+
+.white {
+  color: white;
 }
 
 .colonHeader {
@@ -102,22 +106,50 @@ nav .logo {
   margin-bottom: 0rem;
 }
 
+.orange-background{
+  background-color: #FF7800;
+  color: white;
+  margin-bottom: 0rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 2rem;
+}
 .orange-border {
   border: solid 1px #FF7800;
 }
 
 .todo-background{
-  background-color: #1C71D8;
+  background-color: #E01B24;
   color: white;
   margin-bottom: 0rem;
   margin: 1rem;
 }
 .done-background{
-  background-color: #E01B24;
+  background-color: #1C71D8;
   color: white;
   margin-bottom: 0rem;
   margin: 1rem;
 }
 .taskText {
   padding: 1rem;
+}
+.frozen-button{
+  background-color: #1C71D8;
+  color: white;
+  max-width: 6rem;
+  padding-left: 1.5rem;
+  padding-bottom: 0.1rem;
+  padding-top: 0.1rem;
+  padding-right: 1.5rem;
+}
+
+.orange-create-task{
+  background-color: #FF7800;
+  color: white;
+  margin-bottom: 0rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 2rem;
+  max-width: 6rem;
+  text-align: center;
 }
