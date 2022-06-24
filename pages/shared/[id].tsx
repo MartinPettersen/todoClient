@@ -166,7 +166,7 @@ const TodoList: NextPage<TodoListProp> = ({ todoList }) => {
     <div>
       <div>
       </div>
-      <p className="orange important">URL to share with others: /shared/{todoList.sharedUrl}</p>
+      <p className="orange important">URL to share with others: https://todoclient-mountain-spring.herokuapp.com/shared/{todoList.sharedUrl}</p>
 
       <h2 className="orange">Title: {todoList.title}</h2>
       <h3 className="orange">Desc: {todoList.description}</h3>
